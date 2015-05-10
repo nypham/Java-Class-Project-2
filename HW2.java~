@@ -1,0 +1,206 @@
+/*Ny Pham
+ *This class contains multiple methods that can be used for
+ * string manipulations.*/
+
+public class HW2
+{
+  /* this method takes a string and returns every k^n letter, starting with
+   * n = 0 and incrementing by one until there are no more letters in the string
+   * that satisfy the k^n condition. If k is 1, 0, or a negative integer then
+   * the method returns the original string.
+   * @param string is the input string that will be manipulated
+   * @param k is the integer base*/
+  public static String everykToTheNthChar(String string, int k)
+  {
+    if (k<2)
+      return string;
+    else
+    {
+      //stores the length of the original string
+      int lengthOfString = string.length();
+      //will store the appended characters from the string
+      StringBuilder newString  = new StringBuilder();
+      newString.append(string.charAt(0));
+      int index = k;
+      while(index <= string.length())
+      {
+        //temporarily stores the letter at that index
+        char letter = string.charAt(index - 1);
+        newString.append(letter);
+        //this part of the method is the k^n
+        index = index * k;
+      }
+      return newString.toString();
+    }
+  }
+  
+  /*this method checks to see if the first string input contains all of the
+   * letters of the second string input, in order.*/
+  public static boolean containsSubSequence(String string1, String string2)
+  {
+    //stores the length of the first string
+    int lengthOfString1 = string1.length();
+    //stores the length of the second string
+    int lengthOfString2 = string2.length();
+    //stores whether the string2 is in string1
+    boolean string2InString1 = true;
+    int index1 = 0;
+    int index2 = 0;
+    while(index2 <= (lengthOfString2 - 1) && string2InString1 == true)
+    {
+        if (string2.charAt(index2) != string1.charAt(index1))
+        {
+          if (index1 == lengthOfString1 - 1)
+            string2InString1 = false;
+          else
+            index1++;
+        }
+        else
+        {
+          index2++;
+        }
+      }
+    return string2InString1;
+  }
+  
+  /* this method removes the first appearance of the characters of 
+   * the second string from the first string, but in order. So, if 
+   * the second letter of the second string appears before the first
+   * appearance of the first letter of the second string, then it is 
+   * not removed. */
+  public static String subtract(String string1, String string2)
+  {
+    int lengthOfString1 = string1.length();
+    int lengthOfString2 = string2.length();
+    StringBuilder newString = new StringBuilder();
+    int index1 = 0;
+    int index2 = 0;
+    while(index2 <= (lengthOfString2 - 1))
+    {
+      if (string2.charAt(index2) != string1.charAt(index1))
+      {
+        if(index1 == lengthOfString1 - 1)
+          index2 = lengthOfString2;
+        else
+        {
+        newString.append(string1.charAt(index1));
+        index1++;
+        }
+      }
+      else
+      {
+        index2++;
+        index1++;
+      }
+    }
+    while(index1 <= (lengthOfString1 - 1))
+    {
+      newString.append(string1.charAt(index1));
+      index1++;
+    }
+    return newString.toString();
+  }
+  
+  /*this method takes a string and converts it to a double
+   * if the string contains letters, misplaced negative signs,
+   * or multiple decimal points then the method returns an error.*/
+  public static double doubleValue(String numbers)
+  {
+    double resultingNumber = 0;
+    int numberCounter = 0;
+    int decimalCounter = 0;
+    int valuesBeforeDecimal = 0;
+    for (int index = 0; index < numbers.length(); index++)
+    {
+      if(Character.isDigit(numbers.charAt(index)))
+      {
+        numberCounter++;
+        double number = Character.digit(numbers.charAt(index), 10);
+        double numberValue = number;
+        if(decimalCounter == 0)
+          valuesBeforeDecimal++;
+        for(int numberOfTimesToDivide = 1; numberOfTimesToDivide <= numberCounter; numberOfTimesToDivide++)
+        {
+          numberValue = numberValue / 10;
+        }
+        resultingNumber = resultingNumber + numberValue;
+      }
+      else if(numbers.charAt(index) == '.')
+      {
+        decimalCounter++;
+        if(decimalCounter > 1)
+          throw new NumberFormatException("The value entered, " + numbers + ", contains more than one decimal point.");
+      }
+      else if(Character.isLetter(numbers.charAt(index)))
+        throw new NumberFormatException("The value entered, " + numbers+ ", contains a letter.");
+    }
+    for(int index = 0; index < numbers.length(); index++)
+    {
+      if(numbers.charAt(index) == '-')
+      {
+        if(index != 0)
+          throw new NumberFormatException("The value entered, " + numbers + ",contains a misplaced negative sign.");
+        else
+          resultingNumber = resultingNumber * -1;
+      }
+    }
+    for(int numberOfTimesToMultiply = 1; numberOfTimesToMultiply <= valuesBeforeDecimal; numberOfTimesToMultiply++)
+    {
+      resultingNumber = resultingNumber * 10;
+    }
+    return resultingNumber;
+  }
+  
+  /*this method returns the nth character of every word in 
+   * the string. If the word is shorter than the nth letter 
+   * then the method puts a space as a place holder*/
+  public static String everyNthCharOfWord(String string, int n)
+  {
+    StringBuilder newString = new StringBuilder();
+    int wordPlace = 0;
+    for (int index = 0; index < string.length(); index++)
+    {
+      if(Character.isWhitespace(string.charAt(index)))
+      {
+        if(n > wordPlace && wordPlace != 0)
+          newString.append(' ');
+        wordPlace = 0;
+      }
+      else if(Character.isLetter(string.charAt(index)))
+      {
+        if(wordPlace == n - 1)
+        {
+          newString.append(string.charAt(index));
+        }
+        wordPlace++;
+      }
+    }
+    if(n > wordPlace && wordPlace != 0)
+          newString.append(' ');
+    return newString.toString();
+  }
+  
+  /*this method takes each word of the string and flips it in 
+   * place so that the non-letter characters remain at the same
+   * index.*/
+  public static String flipWords(String string)
+  {
+    StringBuilder wordsFlipped = new StringBuilder();
+    int index = 0;
+    int wordPlace = 0;
+    while(index < string.length())
+    {
+      if(!(Character.isLetter(string.charAt(index))))
+      {
+        for(int i = index - 1; i >= wordPlace; i--)
+        {
+          wordsFlipped.append(string.charAt(i));
+        }
+        wordsFlipped.append(string.charAt(index));
+        wordPlace = index + 1;
+      }
+      index++;
+    }
+    return wordsFlipped.toString();
+  }
+}

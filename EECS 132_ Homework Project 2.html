@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>EECS 132: Homework Project 2</title>
+</head>
+
+<body>
+<h2>Programming Project 2</h2>
+<h3>Due Friday, March 6 at 11:59pm</h3>
+
+<p>The purpose of this project is to give you practice writing loops.  </p>
+
+<p>This second programming assignment is to give you practice writing and manipulating strings.  Arrays are not needed, <em>and you should not
+use arrays in your assignment</em>.  All the methods you create should be <tt>static</tt>.</p>
+
+<p>While it may be tempting to hunt through the API to find classes and methods that can shorten your code, you may not
+do that.  In most cases, the API methods may shorten the <em>writing</em> of your code but increase its <em>running time</em>.
+The only classes and methods you can use are listed below.</p>
+<p><em>Important</em>: you must not use either <tt>break</tt> or <tt>continue</tt> in your code.  These two commands almost always are used to compensate for
+a poorly designed loop.</p>
+
+<p>You <em>are allowed</em> to use the following from the Java API:
+</p><ul><li>class String
+    <ul><li>length</li>
+        <li>charAt</li>
+   </ul></li>
+   <li>class StringBuilder
+   <ul><li>length</li>
+       <li>charAt</li>
+       <li>append</li>
+       <li>toString</li>
+   </ul></li>
+   <li>class Character
+    <ul><li>any method</li>
+   </ul></li>
+   <li>NumberFormatException</li>
+    <ul>only the class, no method of the class
+   </ul>
+</ul>
+<p></p>
+
+<h3>General Guidelines (20% of your grade will be based on using good style)</h3>
+
+<p>
+</p><ul>
+<li>All methods listed below must be <tt>public</tt> and <tt>static</tt>.</li>
+<li>No additional methods are needed.  
+However, you may write additional <em>private</em> helper methods, but you need to have efficient and simple algorithms. Do not write helper methods that do extra, unnecessary,
+traversals of the data.</li>
+<li>You should place a comment at the top of the file that contains your name
+and a short description of the purpose of the class.</li>
+<li>You should place a <em>short</em> comment before (directly above) each method describing the method.  The comment should
+be only describe <em>what</em> the method does, not <em>how</em> it does it.  Do not simply copy the descriptions
+below for your comments.</li>
+<li>You should place a short comment directly above each field (should you really have any?)
+indicating the purpose of the variable.</li>
+<li>You should place a short comment above each loop explaining how the loop works.  Ideally, you should list the goal of the 
+loop, any required precondition for the loop, and if you can, a good iteration subgoal for the loop.</li>
+<li>Any other complicated code such as code the has lots of if statements or variables should contain <em>short</em> comments to help the reader.  The comments can either be above the code fragment or to the right, aligned in a column.</li>
+<li>If your code is using a loop to modify or create a string, you need to use the <tt>StringBuilder</tt> class from the API.</li>
+<li><strong>Important:</strong> You should not use the commands <tt>break</tt> nor <tt>continue</tt> in your loops.</li>
+<li>Remember to use good style: everything should be indented nicely, 
+variables should have good names, there should be a blank line between 
+each method.</li>
+</ul><p></p>
+
+<p>To submit your project, click on the <em>HW 2</em> link, and you should find a <em>Submit</em> link.  Attach your
+Java file and your testing report.
+Remember to attach the files that end in <tt>.java</tt>, not <tt>.class</tt> or <tt>.java~</tt>.</p>
+
+<h3>Part I: Programming (60% of your grade will be correctness of the following)</h3>
+
+<p>Try to keep your code as simple as possible.</p>
+
+
+<p>Create a class called <tt>HW2</tt> that contains the following methods:
+</p><ol>
+
+<li><p><tt>everykToTheNthChar</tt> takes a <tt>String</tt> and an <tt>int</tt> as input and returns a <tt>String</tt>.  Let us call the 
+second input <em>k</em> (but you can name it something else).  The method returns a <tt>String</tt> that contains the 1st character of the input,
+the <em>k</em>th characther of the input, the <em>k^2</em>th character of the input, the <em>k^3</em>th character of the input, etc.
+Return the input string if <em>k</em> is smaller than 2.
+</p><pre>&gt; HW2.everykToTheNthChar("1234567890", 2)
+"1248"
+&gt; HW2.everykToTheNthChar("1234567890", 3)
+"139"
+&gt; HW2.everykToTheNthChar("Case Western", 3)
+"Cst"
+</pre>
+<p></p></li>
+
+<li><p><tt>containsSubSequence</tt> takes two <tt>String</tt>s  as input and returns a <tt>boolean</tt>:
+Returns <tt>true</tt> if the first input string contains all the characters of the second input string, in order, but not necessarily consecutively.
+</p><pre>&gt; HW2.containsSubSequence("abracadabra", "abcd")
+true
+&gt; HW2.containsSubSequence("abracadabra", "abdc")
+false
+</pre>
+<p></p></li>
+
+<li><p><tt>subtract</tt> takes two <tt>String</tt>s and returns a <tt>String</tt>:<br>
+The output string should be the same as the first input string except 
+that you should remove the characters of the second string as follows:
+remove the first occurrence of the first character, the first occurrence
+ of the second character that appears <em>after</em> the removed 
+character,
+the first occurrence of the third character that appears after the first
+ two removed characters, etc.  If there is no such character to remove, 
+then
+nothing further is removed.
+</p><pre>HW2.subtract("gfedcbabcdefg", "acfa")
+"gfedcbbdeg"
+</pre>
+<p></p></li>
+
+<li><p><tt>doubleValue</tt> takes a <tt>String</tt> as input and returns a <tt>double</tt>:<br>
+The input should contain only digits, up to one period <tt>'.'</tt> and may contain one dash, but only as the first character <tt>'-'</tt>.
+The method should return the <tt>double</tt> value that input string 
+represents.  The input may have any number of leading or trailing zeros.
+If the number is not in the correct format (more than one period, the 
+dash is not the first character, or any other non-digit character), then
+report an error by using the statement <tt>throw new NumberFormatException()</tt>.
+Note that there may be <em>very small</em> unavoidable errors due to converting the decimal notation of the string to the binary of the double.
+</p><pre>&gt; HW2.doubleValue("0034.143003")
+34.143003
+&gt; HW2.doubleValue("0034.143.003")
+java.lang.NumberFormatException
+</pre>
+<p></p></li>
+
+<li><p><tt>everyNthCharOfWord</tt> takes a <tt>String</tt> and an <tt>int</tt> as input and returns a <tt>String</tt>:<br>
+If we call the input <tt>int</tt> value <em>n</em>, the output should contain the <em>n</em>th character of each <em>word</em> of the input string, in order.
+If the word does not have <em>n</em> characters, a space should be used for the character.  A word is defined as a consecutive sequence of English letters.
+</p><pre>&gt; HW2.everyNthCharOfWord("Hello everyone!  This is terrific fun!", 2)
+"evhseu"
+&gt; HW2.everyNthCharOfWord("Hello everyone!  This is terrific fun!", 4)
+"lrs r "
+</pre>
+<p></p></li>
+
+<li><p><tt>flipWords</tt> takes a <tt>String</tt> as input and returns a <tt>String</tt>:<br>
+Each word of the input string is reversed in the output string, though the order of the words stays the same.
+A word is defined as a consecutive sequence of English letters.
+</p><pre>&gt; HW2.flipWords("Seventy-six trombones in the big parade!!")
+"ytneveS-xis senobmort ni eht gib edarap!!"
+</pre>
+<p></p></li>
+
+
+<li><p><strong>Extra Credit:</strong> <tt>transpose</tt>:  Takes a <tt>String</tt> as input and returns a <tt>String</tt>:<br>
+The output string is ordered so that, if it is printed, the first word 
+of the input is printed vertically in the first column.  The second word
+ appears
+vertical in the second column, and so forth.  The total number of rows 
+of text should equal the length of the longest word.  Here, a word is 
+either a 
+sequence of consecutive English letters or a sequence of non-whitespace,
+ non-letters.
+(You should look up the special characters such as the <em>newline</em> character in your textbook.)
+</p><pre>&gt; String s = HW2.transpose("Hello everyone!!!   This is $100,000 worth of fun!")
+&gt; System.out.println(s)
+He!Ti$wof!
+ev!hs1ofu
+le!i 0r n
+lr s 0t 
+oy   ,h 
+ o   0  
+ n   0  
+ e   0  
+&gt;
+</pre>
+<p></p></li>
+
+</ol><p></p>
+
+<h3>Part 2: Project Testing (20% of your project grade)</h3>
+
+<p>You need to write tests for each of the methods above.  Your tests 
+should be thorough.
+Your testing report should describe why your test cases sufficiently 
+tested your code as well as the specific tests you ran and their 
+results.
+If you are unable to complete a method above, you should still
+describe tests that would test the method had it been completed.</p>
+
+<p>Hints for testing loops.  Your tests need to, at the minimum cover the following cases:
+</p><ol>
+<li><strong>Test 0, test 1, test many:</strong>  This means you have to test cases where the parameters, if they are integers,
+are 0, 1 or some value other than 1.  If the parameters are strings, you have to test strings of length 0, 1, and more than 1.
+If the strings must contain certain data, you need to test cases where they contain 0, 1, and more than 1 of the desired data.</li>
+<li><strong>Test first, last, and middle:</strong>  In cases where you 
+have to search in or modify a string, you need to test
+cases where the item to be found or modified is the first character of 
+the string, the last character of the string, or somewhere
+in the middle of the string.</li>
+</ol><p></p>
+
+<p>In summary, your tests should cover each of the above cases for each of the methods you complete in the homework.
+Your testing report should state what <em>test 0, test 1, test many</em> and <em>test first, last, and middle</em> mean for each of the homework
+methods and how your tests covered these cases.</p>
+
+<p><strong>JUnit</strong>: you will be learning about JUnit soon in a lab.  JUnit will be required for future homeworks, and you are welcome
+to use it with this homework.  If you choose to write JUnit tests for your code,
+your report should not list the specific tests and their results because the graders can run your JUnit tests.
+Instead, your report should only detail what <em>test 0, test 1, test many</em> and <em>test first, last, and middle</em> means for each
+method and why your JUnit tests cover those cases.
+
+
+
+</p></body></html>

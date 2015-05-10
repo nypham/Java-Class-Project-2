@@ -1,0 +1,216 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1344\cocoasubrtf720
+{\fonttbl\f0\fnil\fcharset0 Cambria;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww12520\viewh14720\viewkind0
+\deftab720
+\pard\pardeftab720\ri0
+
+\f0\fs24 \cf0 Ny Pham\
+Testing for HW2\
+\
+1. Testing String everykToTheNthChar(String string, int k). \
+> HW2.everykToTheNthChar("", 2)\
+java.lang.StringIndexOutOfBoundsException: String index out of range: 0\
+	at java.lang.String.charAt(String.java:646)\
+	at HW2.everykToTheNthChar(HW2.java:23)\
+> HW2.everykToTheNthChar("", 1)\
+""\
+> HW2.everykToTheNthChar("a", 2)\
+"a"\
+> HW2.everykToTheNthChar("ab", 2)\
+"ab"\
+> HW2.everykToTheNthChar("abcdef", -5)\
+"abcdef"\
+> HW2.everykToTheNthChar("abcdef", 0)\
+"abcdef"\
+> HW2.everykToTheNthChar("abcdef", 1)\
+"abcdef"\
+> HW2.everykToTheNthChar("abcdef", 3)\
+"ac"\
+> HW2.everykToTheNthChar("abcdef", 2)\
+"abd"\
+\
+These tests sufficiently test this method because it tests the case where k is less than 2, which should result in the original string being returned. It also tests the case where the string is empty, resulting in an error when k > 2 but works when k < 2. For k > 2, with non-null strings, the return was what was expecting, showing that my loop increment worked properly. The 0,1, many test for this method was used by adjusting the length of the string and then adjusting the value of k. The first, middle, last test was used to test if the first character would print, a middle character, and a last character given the right length string and k value. \
+\
+2. Testing boolean containsSubSequence(String string1, String string2).\
+> HW2.containsSubSequence("hippos", "h")\
+true\
+> HW2.containsSubSequence("hippos", "p")\
+true\
+> HW2.containsSubSequence("hippos", "s")\
+true\
+> HW2.containsSubSequence("hippos", "pp")\
+true\
+> HW2.containsSubSequence("hippos", "po")\
+true\
+> HW2.containsSubSequence("hippos", "PO")\
+false\
+> HW2.containsSubSequence("hippos", " ")\
+false\
+> HW2.containsSubSequence("hippos", "oip")\
+false\
+> HW2.containsSubSequence("hippos", "+")\
+false\
+> HW2.containsSubSequence("hippos", "hippopotamus")\
+false\
+> HW2.containsSubSequence("", "h")\
+java.lang.StringIndexOutOfBoundsException: String index out of range: 0\
+	at java.lang.String.charAt(String.java:646)\
+	at HW2.containsSubSequence(HW2.java:60)\
+> HW2.containsSubSequence("a", "h")\
+false\
+\
+These tests sufficiently test this method because it covers the existence of the characters at the first, middle, and end of the first string. It also tests how the order affects the returned boolean, the case sensitivity, and the case where the second string is longer than the first string. The 0,1, many test for this method was used by adjusting the length of string1. The first, middle, last test was used by choosing a string1 and changing string2 to be a character that was the first, middle, and last in string1. \
+\
+3. Testing String subtract(String string1, String string2).\
+> HW2.subtract("apples", "a")\
+"pples"\
+> HW2.subtract("apples", "l")\
+"appes"\
+> HW2.subtract("apples", "s")\
+"apple"\
+> HW2.subtract("apples and pears", " ")\
+"applesand pears"\
+> HW2.subtract("apples and pears", "A")\
+"apples and pears"\
+> HW2.subtract("apples", "Apples")\
+"apples"\
+> HW2.subtract("apples", "")\
+"apples"\
+> HW2.subtract("apples", "pp")\
+"ales"\
+> HW2.subtract("a", "pp")\
+"a"\
+> HW2.subtract("a", "a")\
+""\
+> HW2.subtract("a", "apples")\
+java.lang.StringIndexOutOfBoundsException: String index out of range: 1\
+	at java.lang.String.charAt(String.java:646)\
+	at HW2.subtract(HW2.java:97)\
+> HW2.subtract("a", "pples")\
+"a"\
+>HW2.subtract("", "pples")\
+java.lang.StringIndexOutOfBoundsException: String index out of range: 0\
+	at java.lang.String.charAt(String.java:646)\
+	at HW2.subtract(HW2.java:97)\
+> HW2.subtract("apple", "apples")\
+java.lang.StringIndexOutOfBoundsException: String index out of range: 5\
+	at java.lang.String.charAt(String.java:646)\
+	at HW2.subtract(HW2.java:97)\
+\
+This test sufficiently tests this method because it covers the cases where the string is being modified in the beginning, middle, and end. It also tests the case of a non-letter being removed, the case sensitivity, when the second string is empty, when both strings contain the same thing, and when the second string is longer than the first. The 0,1, many test for this method was done by adjusting the length of string1 and string2. The first, middle, last test was done by removing the first letter, a middle letter, and the last letter from string1.\
+\
+4. Testing double doubleValue(String numbers)\
+> HW2.doubleValue("0.0")\
+0.0\
+> HW2.doubleValue("1")\
+1.0\
+> HW2.doubleValue("")\
+0.0\
+> HW2.doubleValue(".")\
+0.0\
+> HW2.doubleValue(".0")\
+0.0\
+> HW2.doubleValue("0.")\
+0.0\
+> HW2.doubleValue("-2.3")\
+-2.3000000000000003\
+> HW2.doubleValue("23-")\
+java.lang.NumberFormatException: The value entered, 23-,contains a misplaced negative sign.\
+	at HW2.doubleValue(HW2.java:175)\
+> HW2.doubleValue("2.3")\
+2.3000000000000003\
+> HW2.doubleValue("0.3")\
+0.3\
+> HW2.doubleValue("0.3-")\
+java.lang.NumberFormatException: The value entered, 0.3-,contains a misplaced negative sign.\
+	at HW2.doubleValue(HW2.java:175)\
+> HW2.doubleValue("0.3.56782")\
+java.lang.NumberFormatException: The value entered, 0.3.56782, contains more than one decimal point.\
+	at HW2.doubleValue(HW2.java:162)\
+> HW2.doubleValue("45t89.5")\
+java.lang.NumberFormatException: The value entered, 45t89.5, contains a letter.\
+	at HW2.doubleValue(HW2.java:165)\
+> HW2.doubleValue("45t89..5")\
+java.lang.NumberFormatException: The value entered, 45t89..5, contains a letter.\
+	at HW2.doubleValue(HW2.java:165)\
+> HW2.doubleValue("45+89.5")\
+4589.5\
+> HW2.doubleValue("45-89.5")\
+java.lang.NumberFormatException: The value entered, 45-89.5,contains a misplaced negative sign.\
+	at HW2.doubleValue(HW2.java:175)\
+> HW2.doubleValue("1/2")\
+12.000000000000002\
+> HW2.doubleValue("1*2")\
+12.000000000000002\
+> HW2.doubleValue("92728928.2000000")\
+9.27289282E7\
+> HW2.doubleValue("92728928.2000")\
+9.27289282E7\
+> HW2.doubleValue("9272.2000")\
+9272.199999999999\
+> HW2.doubleValue("0009272.2000")\
+9272.199999999999\
+\
+This test is sufficient because it covers simple conversions, negative values, the errors that come from negative values, the errors from letters, the errors from multiple decimal points, the errors from misplaced negative signs, concatenation of the string, how * and / work in the conversion, leading zeros, and how the rounding affects the final returned double. It tests some errors that were accounted for and some that weren\'92t. The 0, 1, many test was used for the number of place values, decimals, and negative signs in the original string. The first, middle, last test was used to test how the method works for leading, trailing, and significant zeros. It was also used for where the decimals and negative signs were placed. \
+\
+5. Testing String everyNthCharOfWord(String string, int n).\
+> HW2.everyNthCharOfWord("Hello everyone!  This is terrific fun!", 2)\
+"evhseu"\
+> HW2.everyNthCharOfWord("Hello everyone!  This is terrific fun!", 4)\
+"lrs r "\
+>HW2.everyNthCharOfWord("Hello everyone!  This is terrific fun!", 3)\
+"lei rn"\
+> HW2.everyNthCharOfWord("  Hello bud", 4)\
+"l "\
+> HW2.everyNthCharOfWord("  Hello  bud", 4)\
+"l "\
+> HW2.everyNthCharOfWord("  Hello  bud", 10)\
+"  "\
+> HW2.everyNthCharOfWord("!!!!!", 2)\
+""\
+> HW2.everyNthCharOfWord("123456", 2)\
+""\
+> HW2.everyNthCharOfWord("Hello everyone!  This is terrific fun!", 1)\
+"HeTitf"\
+> HW2.everyNthCharOfWord("Hello everyone!  This is terrific fun!", 0)\
+""\
+> HW2.everyNthCharOfWord("", 2)\
+""\
+> HW2.everyNthCharOfWord("a", 1)\
+"a"\
+> HW2.everyNthCharOfWord("a", 2)\
+" "\
+> HW2.everyNthCharOfWord("a", -2)\
+""\
+\
+This test is sufficient because it covers the possibility of double spaces in the string, non-letters, when there are non-letters before the first letter, when the string is made up of numbers, when the string is empty, and when n <= 0. Test 1, 0, and many for this method was used for adjusting the length of the parameters and then adjusting the n value. Test first, middle, and last for this method was used for testing the output letter for the words. This was covered with the "Hello everyone!  This is terrific fun!\'94 strings. The n value was varied for each one so that the letters that were returned contained at least one letter from the front, back, or middle of a word. \
+\
+6. Testing String flipWords(String string)\
+> HW2.flipWords("Seventy-six trombones in the big parade!!")\
+"ytneveS-xis senobmort ni eht gib edarap!!"\
+> HW2.flipWords("Seventy-six trombones  . in the big parade!!")\
+"ytneveS-xis senobmort  . ni eht gib edarap!!"\
+> HW2.flipWords("!Seventy-six trombones in the big parade!!")\
+"!ytneveS-xis senobmort ni eht gib edarap!!"\
+> HW2.flipWords("Seventy-six trombones in the big parade!ab!")\
+"ytneveS-xis senobmort ni eht gib edarap!ba!"\
+> HW2.flipWords("0123456789")\
+"0123456789"\
+> HW2.flipWords("")\
+""\
+> HW2.flipWords("a")\
+""\
+> HW2.flipWords("bad")\
+""\
+> HW2.flipWords("bad ")\
+"dab "\
+> HW2.flipWords(" bad")\
+" "\
+> HW2.flipWords("b ad")\
+"b "\
+> HW2.flipWords("!!!!bad!!!!")\
+"!!!!dab!!!!"\
+\
+This test is sufficient because it it shows that the method works for strings with consecutive non-letters, how the method works with a non-letter as the first character, how it works for a string without any letters, and how it works with just letters. The 0, 1, and many test is the length of the string, which was varied with \'93\'94, \'93a\'94, and \'93bad\'94.  The first, middle, and last test was tested by moving the spaces in a string. For this one, the strings \'93bad \'93, \'93 bad\'94, and \'93b ad\'94 were used. \
+}
